@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:transparent;overflow:hidden;font-family:Bahnschrift,"Segoe UI",system-ui,sans-serif}:root{--accent:#ffb547}
+.isl{--islc:var(--accent);position:fixed;left:50%;top:10px;z-index:500;font-size:calc(13px*var(--isz,1));width:16em;height:2.9em;border-radius:1.45em;background:#000;border:1px solid rgba(255,255,255,.09);box-shadow:0 8px 24px rgba(0,0,0,.45);color:#fff;overflow:hidden;cursor:grab;touch-action:none;user-select:none;opacity:var(--io,1);transform:translateX(-50%);contain:layout paint;transition:width .5s cubic-bezier(.34,1.45,.5,1),height .5s cubic-bezier(.34,1.45,.5,1),border-radius .5s ease,transform .45s cubic-bezier(.34,1.45,.5,1),opacity .3s}
+.isl.open{width:27em;height:12.6em;border-radius:2.1em}
+.isl.drag{cursor:grabbing;transition:none}
+.isl.snapping{transition:left .5s cubic-bezier(.34,1.3,.5,1),top .5s cubic-bezier(.34,1.3,.5,1),width .5s cubic-bezier(.34,1.45,.5,1),height .5s cubic-bezier(.34,1.45,.5,1)}
+.isl.off{transform:translateX(-50%) scale(.4);opacity:0;pointer-events:none}
+.isl-top{display:flex;align-items:center;gap:.65em;height:2.9em;padding:0 .8em 0 .5em}
+.isl.open .isl-top{padding-top:.4em}
+.isl-top img{width:1.9em;height:1.9em;border-radius:50%;object-fit:cover;background:#222;flex:none}
+.isl-top span.t{flex:1;min-width:0;font-weight:600;font-size:.92em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.isl-eq{display:flex;align-items:flex-end;gap:.18em;height:1.1em;flex:none}
+.isl-eq i{width:.22em;height:100%;background:var(--islc);border-radius:2px;transform-origin:bottom;transform:scaleY(.3);animation:iq .8s ease-in-out infinite alternate;animation-play-state:paused}
+.isl-eq i:nth-child(2){animation-delay:-.3s;animation-duration:.6s}.isl-eq i:nth-child(3){animation-delay:-.55s;animation-duration:.95s}
+.isl.play .isl-eq i{animation-play-state:running}.isl.noeq .isl-eq{display:none}
+@keyframes iq{to{transform:scaleY(1)}}
+.isl-body{padding:0 1.1em;opacity:0;transform:scale(.92);pointer-events:none;transition:opacity .2s,transform .45s cubic-bezier(.34,1.45,.5,1)}
+.isl.open .isl-body{opacity:1;transform:none;pointer-events:auto;transition-delay:.08s}
+.isl-art{font-size:.8em;color:#9aa0b4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.6em}
+.isl-bar{height:.3em;border-radius:1em;background:rgba(255,255,255,.18);overflow:hidden}
+.isl-bar i{display:block;height:100%;background:var(--islc);transform-origin:left;transform:scaleX(0);transition:transform .25s linear}
+.isl-ctl{display:flex;justify-content:center;gap:1.2em;margin-top:.7em}
+.isl-ctl button{background:none;border:0;cursor:pointer;width:2.4em;height:2.4em;border-radius:50%;display:grid;place-items:center;transition:transform .2s cubic-bezier(.34,1.8,.5,1),background .2s}
+.isl-ctl button:hover{background:rgba(255,255,255,.14);transform:scale(1.12)}.isl-ctl button:active{transform:scale(.9)}
+.isl-ctl svg{width:1.4em;height:1.4em;fill:#fff}
+
+/* ===== v5 ===== */
+.isl-ex{display:flex;align-items:center;gap:.5em;margin-top:.55em}
+.isl-ex button{background:rgba(255,255,255,.1);border:0;color:#fff;border-radius:.6em;width:2.2em;height:1.9em;cursor:pointer;font-size:.9em}
+.isl-ex button.on{background:var(--islc);color:#000}.isl-ex input{flex:1;min-width:0;accent-color:var(--islc)}.isl-bar{cursor:pointer;padding:.25em 0;background-clip:content-box}
+body.q0 *,body.q1 *{transition:none!important;animation:none!important}
+body.q4 .isl.play{box-shadow:0 0 28px color-mix(in srgb,var(--accent) 45%,transparent),0 8px 24px rgba(0,0,0,.45)}
+body.q4 .visualizer-container{box-shadow:0 0 40px color-mix(in srgb,var(--accent) 18%,transparent)}
+.dj{position:fixed;inset:0;z-index:300;background:radial-gradient(1200px 600px at 50% 0,color-mix(in srgb,var(--accent) 10%,#05060a),#05060a);overflow:auto;padding:14px 16px;opacity:0;transform:scale(.97);pointer-events:none;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.9,.3,1);color:var(--text-main)}
+body.dj-on .dj{opacity:1;transform:none;pointer-events:auto}
+body.dj-on .app-container,body.dj-on .player-deck{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity .4s,transform .5s}
+.dj-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.dj-g{display:grid;grid-template-columns:minmax(310px,1fr) 270px minmax(310px,1fr);gap:12px;align-items:start}
+.dj-g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;margin-top:12px}
+@media(max-width:1000px){.dj-g{grid-template-columns:1fr}}
+.dj-p{background:var(--bg-panel);border:1px solid var(--border);border-radius:16px;padding:12px}
+.dj-b{background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-main);border-radius:8px;padding:7px 10px;font-size:12px;font-weight:700;cursor:pointer;user-select:none}
+.dj-b.on{background:var(--accent);color:#000}
+.dj-r{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.dj-l{font-size:10px;color:var(--text-sub);letter-spacing:1px}
+.dk-title{font-weight:700;margin:8px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dk-tm{display:flex;justify-content:space-between;font-family:Consolas,monospace;font-size:20px}
+.dk-bar{height:8px;background:var(--border);border-radius:6px;overflow:hidden;cursor:pointer;margin:6px 0}
+.dk-bar i{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+.dk-mid{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px}
+.jog{position:relative;width:200px;height:200px;border-radius:50%;background:#0c0e14;border:6px solid var(--border);touch-action:none;flex:none;cursor:grab}
+.plat{position:absolute;inset:26px;border-radius:50%;background:repeating-radial-gradient(#171a24 0 3px,#10131b 3px 6px)}
+.plat b{position:absolute;left:50%;top:5%;width:4px;height:24%;margin-left:-2px;background:var(--accent);border-radius:2px}
+.kn{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--text-sub)}
+.kb{width:38px;height:38px;border-radius:50%;background:#0c0e14;border:2px solid var(--border);position:relative;cursor:ns-resize;touch-action:none}
+.kb i{position:absolute;left:50%;top:3px;width:3px;height:13px;margin-left:-1.5px;background:var(--accent);border-radius:2px;transform-origin:50% 14px}
+.fdw{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;color:var(--text-sub)}
+.fdr{position:relative;background:#0c0e14;border:1px solid var(--border);border-radius:8px;width:12px;height:130px;touch-action:none;cursor:pointer;margin:0 14px}
+.fdw.h .fdr{width:190px;height:12px;margin:8px 0}
+.fth{position:absolute;left:-12px;width:36px;height:16px;margin-top:-8px;background:linear-gradient(#3a4057,#232838);border:1px solid #4a5170;border-radius:4px}
+.fdw.h .fth{top:-11px;left:0;width:18px;height:34px;margin:0 0 0 -9px}
+.mx{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ch{display:flex;flex-direction:column;align-items:center;gap:8px}
+.vu{width:8px;height:130px;background:#0c0e14;border-radius:4px;overflow:hidden;display:flex;align-items:flex-end}
+.vu i{width:100%;height:100%;background:linear-gradient(#ff4d6a,#ffb547 30%,#4ade80 60%);transform-origin:bottom;transform:scaleY(0)}
+.pad{min-width:78px;height:54px}
+.isl{top:6px!important}</style></head><body><div class="isl" id="island"><div class="isl-top"><img id="isl-cover" alt=""><span class="t" id="isl-title">Elite Studio</span><span class="isl-eq"><i></i><i></i><i></i></span></div>
+  <div class="isl-body"><div class="isl-art" id="isl-artist"></div><div class="isl-bar"><i id="isl-prog"></i></div>
+  <div class="isl-ctl"><button id="isl-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button><button id="isl-play" aria-label="Play/Pause"><svg viewBox="0 0 24 24"><path id="isl-pp" d="M8 5v14l11-7z"/></svg></button><button id="isl-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button></div>
+  <div class="isl-ex"><button id="isl-fav" title="Like">♥</button><button id="isl-shuf" title="Shuffle">⇄</button><button id="isl-rep" title="Repeat one">↻</button><button id="isl-img" title="Song image">🖼</button><input type="range" id="isl-vol" min="0" max="1" step="0.01" value="1" title="Volume"></div></div></div>
+  <script>const $=id=>document.getElementById(id),isl=$('island'),B=window.islBridge;let dr=null,lx=0,ly=0;
+B.onState(s=>{$('isl-title').textContent=s.title;$('isl-artist').textContent=s.artist;if(s.cover)$('isl-cover').src=s.cover;isl.classList.toggle('play',s.playing);$('isl-pp').setAttribute('d',s.playing?'M6 19h4V5H6v14zm8-14v14h4V5h-4z':'M8 5v14l11-7z');$('isl-prog').style.transform='scaleX('+s.prog+')';$('isl-fav').classList.toggle('on',s.fav);$('isl-shuf').classList.toggle('on',s.shuf);$('isl-rep').classList.toggle('on',s.rep);if(document.activeElement!==$('isl-vol'))$('isl-vol').value=s.vol;isl.style.setProperty('--islc',s.white?'#fff':s.color);isl.style.setProperty('--isz',s.size);isl.style.setProperty('--io',s.op);isl.classList.toggle('noeq',!s.eq)});
+const C=(t,v)=>B.cmd(t,v);$('isl-prev').onclick=()=>C('prev');$('isl-next').onclick=()=>C('next');$('isl-play').onclick=()=>C('play');$('isl-fav').onclick=()=>C('fav');$('isl-shuf').onclick=()=>C('shuf');$('isl-rep').onclick=()=>C('rep');
+$('isl-img').title='Open Elite Studio';$('isl-img').textContent='⤢';$('isl-img').onclick=()=>B.open();
+document.querySelector('.isl-bar').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();C('seek',(e.clientX-r.left)/r.width)};
+$('isl-vol').oninput=e=>C('vol',+e.target.value);
+isl.addEventListener('mouseenter',()=>{B.mouse(false);isl.classList.add('open')});isl.addEventListener('mouseleave',()=>{if(dr)return;B.mouse(true);isl.classList.remove('open')});
+isl.addEventListener('pointerdown',e=>{if(e.target.closest('button,.isl-bar,input'))return;dr=1;lx=e.screenX;ly=e.screenY;isl.setPointerCapture(e.pointerId)});
+isl.addEventListener('pointermove',e=>{if(!dr)return;B.move(e.screenX-lx,e.screenY-ly);lx=e.screenX;ly=e.screenY});
+isl.addEventListener('pointerup',()=>{if(dr){dr=null;B.savepos()}});</script></body></html>
